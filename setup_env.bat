@@ -25,32 +25,23 @@ if errorlevel 1 (
     exit /b
 )
 
-:: 激活虛擬環境
-echo Activating the environment 'prolifmsc'...
-conda activate prolifmsc
-if errorlevel 1 (
-    echo [ERROR] Failed to activate the environment. Check if it was created properly.
-    pause
-    exit /b
-)
-
-:: 安裝必要的套件
-echo Installing packages...
-python -m pip install cellpose
+:: 使用 call 指令執行 conda activate 和後續命令
+echo Activating the environment 'prolifmsc' and installing packages...
+call conda run -n prolifmsc python -m pip install cellpose
 if errorlevel 1 (
     echo [ERROR] Failed to install 'cellpose'. Check Python or pip settings.
     pause
     exit /b
 )
 
-pip install pyimagej
+call conda run -n prolifmsc pip install pyimagej
 if errorlevel 1 (
     echo [ERROR] Failed to install 'pyimagej'.
     pause
     exit /b
 )
 
-pip3 install torch torchvision torchaudio
+call conda run -n prolifmsc pip3 install torch torchvision torchaudio
 if errorlevel 1 (
     echo [ERROR] Failed to install PyTorch packages.
     pause
