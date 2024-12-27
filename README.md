@@ -12,7 +12,8 @@ ProlifMSC is a command-line tool designed for processing cell images and perform
 - Maven
 
 Install the Prerequisites using:
-run `install.bat`
+ - set up your java, maven, anaconda loaction
+ - run `install.bat`
 
 
 ### Python Dependencies
@@ -24,7 +25,7 @@ run `install.bat`
 
 
 Install the dependencies using: 
-run `env_set.bat`
+ - run `env_set.bat`
 
 ## Usage
 
