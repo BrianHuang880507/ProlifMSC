@@ -5,7 +5,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 import unittest
 from unittest.mock import patch, MagicMock
-from prolifmsc.main import cell_analyze
+from main import cell_analyze
 
 
 class TestProcessImages(unittest.TestCase):
