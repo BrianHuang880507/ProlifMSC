@@ -7,39 +7,39 @@ ProlifMSC is a command-line tool designed for processing cell images and perform
 2. **Image Analysis**: Analyze the cropped images using Fiji ImageJ to extract detailed measurements.
 
 ## Prerequisites
-- Fiji ImageJ or ImageJ2
+- Fiji ImageJ
+- Java
 - Maven
 
+Install the Prerequisites using:
+run `install.bat`
+
+
 ### Python Dependencies
-- Python 3.8+
+- Python 3.10+
 - Required libraries:
-  - `opencv-python`
-  - `numpy`
-  - `torch`
   - `cellpose`
   - `pyimagej`
-  - `pandas`
-  - `matplotlib`
+  - `torchvision`
 
-Install the dependencies using:
-```bash
-pip install -r requirements.txt
-```
+
+Install the dependencies using: 
+run `env_set.bat`
 
 ## Usage
 
 ### 1. Env Config
 Set up your cellpose model
--Place model at `<pathtocellpose>\.cellpose\models\<yourmodel.pt>`.
+ - Place model at `<pathtocellpose>\.cellpose\models\<yourmodel.pt>`.
 
 Set up Imagej
--Put your Fiji.app at `.\prolifmsc`.
+ - Put your Fiji.app at `.\prolifmsc\`.
 
 Dataset placement
--`.\data\input` your datastes placement.
+ - `.\data\input\` your datastes placement.
 
 ### 2. Image Processing
-Segment and crop images using the `process` command.
+Segment and crop images run `img_process.bat` or using the `process` command.
 
 #### Arguments:
 - `--pc_folder_name`: Folder containing PC images (e.g., bright-field phase-contrast images).
@@ -51,7 +51,7 @@ python main.py process --pc_folder_name PC --df_folder_name DF
 ```
 
 ### 3. Image Analysis
-Perform Fiji ImageJ analysis on the cropped images using the `analyze` command.
+Perform Fiji ImageJ analysis on the cropped images run `cell_anal.bat` or using the `analyze` command.
 
 #### Arguments:
 - `--data_name`: Dataset folder containing cropped images and their corresponding outlines.
