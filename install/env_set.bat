@@ -4,7 +4,6 @@ chcp 65001 >nul
 
 echo ---------------------------------------
 echo 環境設置腳本開始
-:: 定義環境變數
 echo ---------------------------------------
 
 :: 檢查管理員權限
@@ -25,8 +24,7 @@ if %errorLevel% neq 0 (
 
 :: 激活 Conda 環境
 echo 激活 Conda 環境...
-call conda init
-call conda activate prolifmsc
+call "%ProgramData%\anaconda3\condabin\conda.bat" activate prolifmsc
 if %errorLevel% neq 0 (
     echo Conda 環境激活失敗！
     pause
