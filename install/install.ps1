@@ -1,4 +1,9 @@
 # PowerShell script to install OpenJDK, Maven, and Fiji ImageJ
+If (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
+    Write-Error "Please run this script as Administrator!"
+    Pause
+    Exit 1
+}
 
 # Define file paths
 $JavaZipPath = "$PSScriptRoot\openjdk-23.0.1_windows-x64_bin.zip"
@@ -30,7 +35,7 @@ If (Test-Path $JavaZipPath) {
     If (-Not (Test-Path $JavaInstallDir)) { New-Item -ItemType Directory -Path $JavaInstallDir | Out-Null }
     Expand-Archive -Path $JavaZipPath -DestinationPath $JavaInstallDir -Force
     [Environment]::SetEnvironmentVariable("JAVA_HOME", $JavaInstallDir, [System.EnvironmentVariableTarget]::Machine)
-    [Environment]::SetEnvironmentVariable("Path", "$($Env:Path);$JavaInstallDir\bin", [System.EnvironmentVariableTarget]::Machine)
+    [Environment]::SetEnvironmentVariable("Path", "$($Env:Path);%JAVA_HOME%\bin", [System.EnvironmentVariableTarget]::Machine)
     
     & java -version
     If ($?) {
@@ -52,7 +57,7 @@ If (Test-Path $MavenZipPath) {
     If (-Not (Test-Path $MavenInstallDir)) { New-Item -ItemType Directory -Path $MavenInstallDir | Out-Null }
     Expand-Archive -Path $MavenZipPath -DestinationPath $MavenInstallDir -Force
     [Environment]::SetEnvironmentVariable("M2_HOME", $MavenInstallDir, [System.EnvironmentVariableTarget]::Machine)
-    [Environment]::SetEnvironmentVariable("Path", "$($Env:Path);$MavenInstallDir\bin", [System.EnvironmentVariableTarget]::Machine)
+    [Environment]::SetEnvironmentVariable("Path", "$($Env:Path);%M2_HOME%\bin", [System.EnvironmentVariableTarget]::Machine)
     
     & mvn -version
     If ($?) {
