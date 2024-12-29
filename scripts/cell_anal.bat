@@ -4,8 +4,12 @@ chcp 65001 >nul
 
 :: 定義變數
 set ENV_NAME=prolifmsc
-set output_data=B4_P14-DF
-set code_dir=D:\Project\prolifmsc\
+set output_data=B4_P14-DF_crop
+
+set code_dir=%~dp0..
+for %%A in ("%code_dir%") do set "code_dir=%%~fA"
+set FIJI_PATH=%code_dir%\prolifmsc\Fiji.app\java\win64\zulu8.60.0.21-ca-fx-jdk8.0.322-win_x64\jre
+setx JAVA_HOME "%FIJI_PATH%" /m
 
 :: 切換到程式碼目錄
 cd /d %code_dir%

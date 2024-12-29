@@ -6,7 +6,35 @@ chcp 65001 >nul
 set ENV_NAME=prolifmsc
 set pc_folder=B4_P14-PC
 set df_folder=B4_P14-DF
-set code_dir=D:\Project\prolifmsc\
+set code_dir=%~dp0..
+
+:: 檢查目標目錄是否存在，若不存在則創建
+if not exist "%USERPROFILE%\.cellpose\models" (
+    mkdir "%USERPROFILE%\.cellpose\models"
+)
+
+:: 定義源目錄
+set SOURCE_DIR=%USERPROFILE%\prolifmsc
+
+:: 定義目標目錄
+set TARGET_DIR=%USERPROFILE%\.cellpose\models
+
+:: 移動檔案
+move "%SOURCE_DIR%\model_BDL3_label_dapi" "%TARGET_DIR%"
+if %errorLevel% neq 0 (
+    echo 無法移動 model_BDL3_label_dapi 到 %TARGET_DIR%！
+    pause
+    exit /b 1
+)
+
+move "%SOURCE_DIR%\model_BDL6_label_test" "%TARGET_DIR%"
+if %errorLevel% neq 0 (
+    echo 無法移動 model_BDL6_label_test 到 %TARGET_DIR%！
+    pause
+    exit /b 1
+)
+
+echo 所有檔案已成功移動到 %TARGET_DIR%
 
 :: 切換到程式碼目錄
 cd /d %code_dir%
